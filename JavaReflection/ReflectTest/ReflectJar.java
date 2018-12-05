@@ -20,7 +20,7 @@ public class ReflectJar {
         Method method_print = cls.getMethod("print",String.class);//方法名和对应的各个参数的类型
         method_print.invoke(obj,"World");//调用得到的上边的方法method(静态方法，第一个参数可以为null)
         Method method_staticPrint = cls.getMethod("staticPrint",String.class);//方法名和对应的各个参数的类型
-        method_staticPrint.invoke(obj,"World");//调用得到的上边的方法method(静态方法，第一个参数可以为null)
+        method_staticPrint.invoke(null,"World");//调用得到的上边的方法method(静态方法，第一个参数可以为null)
 
     }
 }
