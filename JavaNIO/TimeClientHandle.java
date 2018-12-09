@@ -7,7 +7,6 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
-import java.util.Scanner;
 import java.util.Set;
 
 public class TimeClientHandle implements Runnable{
@@ -47,7 +46,6 @@ public class TimeClientHandle implements Runnable{
                 socketChannel.write(writeBuffer);
                 if(!writeBuffer.hasRemaining())
                     System.out.println("Send order to server succeed.");
-                writeBuffer.clear();
             }else
                 socketChannel.register(selector, SelectionKey.OP_CONNECT);
         }catch (IOException e){
@@ -79,7 +77,6 @@ public class TimeClientHandle implements Runnable{
                                     sc.write(writeBuffer);
                                     if(!writeBuffer.hasRemaining())
                                         System.out.println("Send order to server succeed.");
-                                    writeBuffer.clear();
                                 }else System.exit(1);//连接失败，进程退出
                             }
                             //监听读操作，读取服务器端写回的网络消息
@@ -101,7 +98,6 @@ public class TimeClientHandle implements Runnable{
                                     writeBuffer.put(bytes2);
                                     writeBuffer.flip();
                                     sc.write(writeBuffer);
-                                    writeBuffer.clear();
                                 }else if(readBytes < 0){
                                     //对端链路关闭
                                     key.cancel();

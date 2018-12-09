@@ -85,7 +85,6 @@ public class NIOServerDemo {
                                         writeBuffer.put(bytes2);
                                         writeBuffer.flip();
                                         sc.write(writeBuffer);
-                                        writeBuffer.clear();
                                     } else if(readBytes < 0) {
                                         //对端链路关闭
                                         key.cancel();
