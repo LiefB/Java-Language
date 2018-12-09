@@ -77,6 +77,7 @@ public class NIOServerDemo {
                                         readBuffer.get(bytes);
                                         String body = new String(bytes, "UTF-8");
                                         System.out.println("Server receive a order: \"" + body + "\"");
+                                        readBuffer.clear();
                                         String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new java.util.Date(System.currentTimeMillis()).toString() : "OTHER ORDER";
                                         //写应答
                                         byte[] bytes2 = ("CurrentTime is: " + currentTime).getBytes();
@@ -84,6 +85,7 @@ public class NIOServerDemo {
                                         writeBuffer.put(bytes2);
                                         writeBuffer.flip();
                                         sc.write(writeBuffer);
+                                        writeBuffer.clear();
                                     } else if(readBytes < 0) {
                                         //对端链路关闭
                                         key.cancel();

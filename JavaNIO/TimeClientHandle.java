@@ -46,7 +46,8 @@ public class TimeClientHandle implements Runnable{
                 writeBuffer.flip();
                 socketChannel.write(writeBuffer);
                 if(!writeBuffer.hasRemaining())
-                    System.out.println("Send order 2 server succeed.");
+                    System.out.println("Send order to server succeed.");
+                writeBuffer.clear();
             }else
                 socketChannel.register(selector, SelectionKey.OP_CONNECT);
         }catch (IOException e){
@@ -78,6 +79,7 @@ public class TimeClientHandle implements Runnable{
                                     sc.write(writeBuffer);
                                     if(!writeBuffer.hasRemaining())
                                         System.out.println("Send order to server succeed.");
+                                    writeBuffer.clear();
                                 }else System.exit(1);//连接失败，进程退出
                             }
                             //监听读操作，读取服务器端写回的网络消息
@@ -91,6 +93,7 @@ public class TimeClientHandle implements Runnable{
                                     readBuffer.get(bytes);
                                     String body =new String(bytes, "UTF-8");
                                     System.out.println("Client reveive a response: \"" + body + "\"");
+                                    readBuffer.clear();
                                     //this.stop =true;
                                     //写应答
                                     byte[] bytes2 = "QUERY TIME ORDER".getBytes();
@@ -98,6 +101,7 @@ public class TimeClientHandle implements Runnable{
                                     writeBuffer.put(bytes2);
                                     writeBuffer.flip();
                                     sc.write(writeBuffer);
+                                    writeBuffer.clear();
                                 }else if(readBytes < 0){
                                     //对端链路关闭
                                     key.cancel();
