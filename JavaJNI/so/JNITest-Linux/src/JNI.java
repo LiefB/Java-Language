@@ -4,6 +4,7 @@ public class JNI {
 
     // 静态代码块，加载由C++代码生成的.dll动态链接库文件
     static {
-        System.loadLibrary("JNIdll");
+        System.load("/home/liefb/lib/libJNI.so");
+        //System.loadLibrary("libJNI");
     }
 }
