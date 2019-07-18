@@ -2,7 +2,7 @@
 #include <ctime>
 #include "calculate.h"
 
-int main(char* args, int argv) {
+int main(int argc, char** argv) {
 	int n = 100000000;
 	int* arr = new int[100000000];
 	for (int i = 0; i < n; i++) {
